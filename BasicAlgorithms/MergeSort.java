@@ -1,46 +1,56 @@
 public class MergeSort {
-    private int[] helpers;
     private int[] numbers;
+    private int[] helper;
     private int number;
 
     public void sort(int[] numbers) {
-        this.numbers = numbers;
-        this.number = numbers.length;
-        this.helpers = new int[number];
-        this.split(this.numbers, 0, this.number - 1);
-
+        this.numbers = numbers; // this只是为了表示赋值到private member variable
+        number = numbers.length;
+        helper = new int[number];
+        splitMerge(0, number - 1); // 起始index
     }
 
-    private void split(int[] numbers, int low, int high) {
-        if (low < high - 1) {
-            int middle = (high - low) / 2;
-            this.split(numbers, low, middle);
-            this.split(numbers, middle + 1, high);
-            this.merge(numbers, low, middle, high);
+    private void splitMerge(int low, int high) {
+        if (low < high) { // 递归终止条件
+            middle = low + (high - low) / 2;
+            splitMerge(low, middle);
+            splitMerge(middle + 1, high);
+            merge(low, middle, high);
         }
     }
 
-    private void merge(int[] numbers, int low, int middle, int high) {
-        for (int i = low; i < high; i++) {
-            helpers[i] = numbers[i];
+    private merge(int low, int middle, int high){
+        for (int i=low; i<=high; i++){
+            helper[i] = numbers[i];
         }
 
-        i = low;
-        j = middle + 1;
-        k = low;
+        int i = low;
+        int k = low;
+        int j = middle + 1;
 
-        while (i <= middle && j <= high) {
-            if (helpers[i] < helpers[j]) {
-                numbers[k] = helpers[i];
+        // merge sort的核心是sort两个sorted array
+        while (i<=low && j<=high){
+            if (helper[i] <= helper[j]){
+                numbers[k] = helper[i];
                 i++;
-            } else if (helpers[i] > helpers[j]) {
-                numbers[k] = helpers[j];
+            }
+            else{
+                numbers[k] = helper[j];
                 j++;
             }
             k++;
-
         }
 
-        // while (i)
+        while(i<=low){
+            numbers[k] = helper[i];
+            k++;
+            i++;
+        }
+        while(j<=high){
+            numbers[k] = helper[j];
+            k++;
+            j++;
+        }
+        
     }
 }
