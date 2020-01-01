@@ -26,7 +26,7 @@ class Solution {
 }
 
 /*
- * Second attemp: Optimized the code implementation to make it clearer.
+ * Second attempt: Optimized the code implementation to make it clearer.
  * 
  * Tips: Why we use a dummyhead is because we need to return the whole
  * linkedlist also make modification to the linkedlist during running
