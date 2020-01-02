@@ -25,4 +25,7 @@ class Solution {
 
 /*
  * Key point: using sliding window to calculate the maximum length
+ * 
+ * May optimizate with: HashMap has a method `containKeys`, by using this method
+ * code can be shortened a bit
  */
